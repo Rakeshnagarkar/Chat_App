@@ -5,7 +5,10 @@ import { io } from 'socket.io-client';
 
 export const useAuthStore = create((set, get) => ({
 
-    BASE_URL: import.meta.env.NODE_ENV === "development" ? "http://localhost:5001" : process.env.BASE_URL,
+    BASE_URL: import.meta.env.MODE === "development"
+        ? "http://localhost:5001"
+        : import.meta.env.VITE_BASE_URL,
+
 
     authUser: null,
     isSigningUp: false,
