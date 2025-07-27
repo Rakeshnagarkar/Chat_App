@@ -7,9 +7,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import authRoutes from './routes/auth.route.js';
-import messageRoutes from "./routes/message.route.js";
-import { connectDB } from "./lib/db.js";
-import { app, server } from "./lib/socket.js";
+import messageRoutes from './routes/message.route.js';
+import { connectDB } from './lib/db.js';
+import { app, server } from './lib/socket.js';
 
 dotenv.config();
 
@@ -22,27 +22,21 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json({ limit: '200mb' }));
 app.use(express.urlencoded({ limit: '200mb', extended: true }));
 app.use(cookieParser());
+
+// CORS setup (update to match your Netlify or Vercel frontend URL in production)
 app.use(cors({
-  origin: 'http://localhost:5173', // for local dev; update if needed in prod
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
   credentials: true
 }));
 
 // API routes
-app.use("/api/auth", authRoutes);
-app.use("/api/messages", messageRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/messages', messageRoutes);
 
-// Serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../../Frontend/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../../Frontend/dist/index.html"));
-  });
-} else {
-  // Show this only during development
-  app.get("/", (req, res) => {
-    res.send("Backend is running! 🚀");
-  });
-}
+// Optional root route (useful for testing)
+app.get('/', (req, res) => {
+  res.send('Backend is running! 🚀');
+});
 
 // Start server
 server.listen(PORT, () => {
