@@ -1,13 +1,13 @@
 {
   "name": "chat_app",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Separated frontend and backend deployment",
   "scripts": {
-    "build": "npm install --prefix Backend && npm install --prefix Frontend && npm run build --prefix Frontend",
-    "start": "npm run start --prefix Backend"
+    "start:backend": "npm run start --prefix Backend",
+    "dev:frontend": "npm run dev --prefix Frontend",
+    "build:frontend": "npm run build --prefix Frontend"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
