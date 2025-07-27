@@ -60,8 +60,8 @@ function ChatContainer() {
             <MessageSkeleton />
             <MessageSkeleton />
           </>
-        ) : messages.length > 0 ? (
-          messages.map((message) => (
+        ) : Array.isArray(messages) && messages.length > 0 ? (
+  messages.map((message) => (
             <div
               key={message._id}
               className={`chat ${
