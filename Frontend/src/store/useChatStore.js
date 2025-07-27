@@ -36,29 +36,29 @@ export const useChatStore = create((set, get) => ({
     },
 
     getMessages: async (userId) => {
-  set({ isMessagesLoading: true });
+        set({ isMessagesLoading: true });
 
-  try {
-    const res = await axiosInstance.get(`/messages/${userId}`);
-    const data = res.data;
+        try {
+            const res = await axiosInstance.get(`/messages/${userId}`);
+            const data = res.data;
 
-    if (Array.isArray(data)) {
-      set({ messages: data });
-    } else if (Array.isArray(data.messages)) {
-      set({ messages: data.messages });
-    } else {
-      console.error("Unexpected response format:", data);
-      set({ messages: [] });
-    }
+            if (Array.isArray(data)) {
+                set({ messages: data });
+            } else if (Array.isArray(data.messages)) {
+                set({ messages: data.messages });
+            } else {
+                console.error("Unexpected response format:", data);
+                set({ messages: [] });
+            }
 
-  } catch (error) {
-    console.error("Error in getMessages:", error);
-    toast.error(error?.response?.data?.message || "Something went wrong");
-    set({ messages: [] }); // Set empty array to avoid .map error
-  } finally {
-    set({ isMessagesLoading: false });
-  }
-},
+        } catch (error) {
+            console.error("Error in getMessages:", error);
+            toast.error(error?.response?.data?.message || "Something went wrong");
+            set({ messages: [] }); // Set empty array to avoid .map error
+        } finally {
+            set({ isMessagesLoading: false });
+        }
+    },
 
     sendMessage: async (data) => {
 
