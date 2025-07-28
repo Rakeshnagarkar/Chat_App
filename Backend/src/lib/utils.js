@@ -5,15 +5,13 @@ export const generateToken = (userId, res) => {
         expiresIn: '7d'
     });
 
-    // Cookie configuration
     res.cookie("jwt", token, {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         httpOnly: true,
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined
+        secure: process.env.NODE_ENV === 'production'
+        // 🔥 Don't add domain here unless you are using a custom domain!
     });
 
-    // Also return the token for Authorization header use
     return token;
 };

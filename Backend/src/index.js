@@ -26,7 +26,7 @@ app.use(cookieParser());
 // CORS setup (update to match your Netlify or Vercel frontend URL in production)
 app.use(cors({
   origin: [process.env.CLIENT_URL , 'http://localhost:5173'],
-  credentials: true
+  credentials: true,
 }));
 
 // API routes
