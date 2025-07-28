@@ -15,4 +15,4 @@
 - **👾 Real-time messaging with Socket.io**
 - **🚀 Online user status**
 - **👌 Global state management with Zustand**
-- **Responsive Design** – Mobile-friendly UI built with TailwindCSS
+- ** Responsive Design**
